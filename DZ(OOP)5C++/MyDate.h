@@ -23,6 +23,11 @@ public:
 	int Getdate()const;
 	int Getmonth()const;
 	int Getyear()const;
+
+	void Print();
+
+	MyDate& operator ++();
+	MyDate& operator --();
 	
 	MyDate operator ++(int);
 	MyDate operator --(int);
@@ -30,7 +35,7 @@ public:
 	MyDate operator +(int b);
 	MyDate operator -(int b);
 
-	MyDate operator+= ( int b, MyDate&a)
+	/*MyDate& operator += ( MyDate& a, int b);*/
 
 
 
