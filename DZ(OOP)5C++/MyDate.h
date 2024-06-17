@@ -15,8 +15,6 @@ public:
 	MyDate(const MyDate& b);
 
 	void Setdate(int dt,int mt, int yr);
-	void Setmonth(int mt);
-	void Setyear(int yr);
 
 	int Getdate()const;
 	int Getmonth()const;
@@ -33,7 +31,17 @@ public:
 	MyDate operator +(int b);
 	MyDate operator -(int b);
 
-	/*MyDate& operator += ( MyDate& a, int b);*/
+	MyDate operator += ( int b);
+	MyDate operator -= (int b);
+
+	bool operator > (MyDate& a);
+	bool operator < (MyDate& a);
+
+	bool operator >= (MyDate& a);
+	bool operator <= (MyDate& a);
+
+	bool operator == (MyDate& a);
+	bool operator != (MyDate& a);
 
 
 
