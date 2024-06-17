@@ -10,8 +10,6 @@ private:
 	int year;
 public:
 	MyDate() = default;
-	MyDate(int dt);
-	MyDate(int dt, int mt);
 	MyDate(int dt, int mt, int yr);
 	~MyDate();
 	MyDate(const MyDate& b);

@@ -1,28 +1,16 @@
 #include "MyDate.h"
 
-int arr31[7] = { 1,3,5,7,8,10,12 };
-int arr30[4] = { 4,6,9,11 };
 
 
 
-MyDate::MyDate(int dt)  
+MyDate::MyDate(int dt, int mt, int yr) 
 {
 	date = dt;
-}
- 
-MyDate::MyDate(int dt, int mt):MyDate(dt) 
-{
 	month = mt;
-}
-
-MyDate::MyDate(int dt, int mt, int yr):MyDate(dt,mt)   
-{
 	year = yr; 
 }
 
-
 MyDate::~MyDate() 
-
 {
 	date = 0;
 	month = 0;
@@ -38,42 +26,49 @@ MyDate::MyDate(const MyDate& b)
 
 void MyDate::Setdate(int dt,int mt, int yr)
 {
-	for (int i = 0; i < 7; i++) {
-		if (dt > 0 && dt < 32 && mt == arr31[i]) {
+	if ( mt ==1 && dt>0 && dt<32 && yr>0|| mt == 3 && dt>0 && dt < 32 && yr>0 || mt == 5 && dt>0 && dt < 32 && yr>0 || mt == 7 && dt>0 && dt < 32 && yr>0 || mt == 8 && dt>0 && dt < 32 && yr>0 || mt == 10 && dt>0 && dt < 32 && yr>0 || mt == 12 && dt>0 && dt < 32 && yr>0) {
 			date = dt;
-			i = 7;
+			cout << "Date-> " << date << endl ; 
 		}
-	}
-	for (int j = 0; j < 4; j++) {
-		if (dt > 0 && dt < 31 && mt == arr30[j]) {
+	else if (dt > 0 && dt < 31 && mt == 4 && yr>0 || dt > 0 && dt < 31 && mt==6 && yr>0 || dt > 0 && dt < 31 && mt==9 && yr>0 || dt > 0 && dt < 31 && mt==11 && yr>0) {
 			date = dt;
-			j = 4;
+			cout << "Date-> " << date << endl ;
 		}
-	}
-
-	if(dt>0 && dt<30 && mt == 2 && yr % 100 == 0 && yr % 400 = 0 ||yr%100>0 && yr % 4 == 0)  {
-			date = dt;
-	}
-	else if (dt>0 && dt<29 && mt == 2 && yr % 100 > 0 && yr % 400 > 0 ||yr%100>0 && yr % 4 > 0) {
+	else if (dt>0 && dt<29 && mt == 2 && yr % 100 > 0 && yr % 400 > 0 && yr > 0 || dt > 0 && dt < 29 && mt == 2 && yr%100>0 && yr % 4 > 0 && yr > 0)  {
 			date = dt; 
+			cout << "Date-> " << date << endl ;
 	}
-	
-
-}
-
-void MyDate::Setmonth(int mt)
-{
-	if (mt > 0 && mt < 13) {
-		month = mt; 
+	else if (dt > 0 && dt < 30 && mt == 2 && yr % 100 == 0 && yr % 400 == 0 && yr>0 || dt > 0 && dt < 30 && mt == 2 && yr % 100>0 && yr % 4 == 0 && yr > 0) {
+		date = dt; 
+		cout << "Date-> " << date << endl; 
 	}
-}
+	else {
+		cout << "The date entered is incorrect. Please re-enter."<<endl; 
+	}
 
-void MyDate::Setyear(int yr)
-{
-	if (yr > 0) {
+
+	if (mt > 0 && mt < 13 && yr>0)  {
+		month = mt;
+		cout << "Month-> " << month<<endl; 
+	}
+	else {
+		cout << "The month entered is incorrect. Please re-enter." << endl; 
+	}
+
+
+
+	if (yr > 0)  {
 		year = yr; 
+		cout << "Year-> " << year << endl ;
 	}
+	else {
+		cout << "The year entered is incorrect. Please re-enter." << endl; 
+	}
+
+
 }
+
+
 
 int MyDate::Getdate() const
 {
@@ -93,40 +88,35 @@ int MyDate::Getyear() const
 
 void MyDate::Print()
 {
+	cout << "Date ->" << date << endl << "Month ->" << month << endl << "Year ->" << year << endl;
 }
 
 MyDate& MyDate::operator++()
 {
-	for (int i = 0; i < 7; i++) {
-		if (this->date = 31 && this->month == arr31[i]) {
+	if (this->month == 1 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 3 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 5 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 7 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 8 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 10 && this->date > 0 && this->date < 32 && this->year>0 || this->month == 12 && this->date > 0 && this->date < 32 && this->year>0) {
+		if (this->date == 31 && this->month!=12) {
 			this->date -= 30;
-			i = 7;
-			if (this->month == 12) {
-				this->month -= 11;
-				this->year += 1;
-			}
-			else if (this->month != 12) {
-				this->month += 1;
-			}
+			this->month += 1;
+		}
+		else if (this->date == 31 && this->month == 12) {
+			this->date -= 30;
+			this->month -= 11;
+			this->year += 1;
+
+		}
+		else {
+			this->date += 1;
 		}
 	}
-	for (int j = 0; j < 4; j++) {
-		if (this->date = 30 && this->month == arr30[j]) {
+	else if (this->date > 0 && this->date < 31 && this->month == 4 && this->year>0 || this->date > 0 && this->date < 31 && this->month == 6 && this->year>0 || this->date > 0 && this->date < 31 && this->month == 9 && this->year>0 || this->date > 0 && this->date < 31 && this->month == 11 && this->year>0) {
+		if (this->date == 30 ) {
 			this->date -= 29;
 			this->month += 1;
-			j = 4;
 		}
 	}
-	if (this->date == 29 && this->month == 2 && this->year % 100 == 0 && this->year % 400 = 0 || this->year % 100 > 0 && this->year % 4 == 0) {
-		this->date -= 28;
-		this->month += 1;
+	else if (this->date > 0 && this->date < 29 && this->month == 2 && this->year % 100 > 0 && this->year % 400 > 0 && this->year > 0 || this->date > 0 && this->date < 29 && this->month == 2 && this->year % 100>0 && this->year % 4 > 0 && this->year > 0) {
 	}
-	else if (this->date == 28 && this->month == 2 && this->year % 100 > 0 && this->year % 400 > 0 || this->year % 100 > 0 && this->year % 4 > 0) {
-		this->date -= 27;
-		this->month += 1;
-	}
-	else {
-		this->date += 1;
+	else if (this->date > 0 && this->date < 30 && this->month == 2 && this->year % 100 == 0 && this->year % 400 == 0 && this->year>0 || this->date > 0 && this->date < 30 && this->month == 2 && this->year % 100>0 && this->year % 4 == 0 && this->year > 0) {
 	}
 	return *this;
 	
@@ -135,7 +125,7 @@ MyDate& MyDate::operator++()
 MyDate& MyDate::operator--()
 {
 	for (int i = 0; i < 7; i++) {
-		if (this->date = 1 && this->month == arr31[i]) {
+		if (this->date = 1 && this->month == 1) {
 			this->date += 29;
 			i = 7;
 			if (this->month == 1) {
@@ -148,17 +138,13 @@ MyDate& MyDate::operator--()
 		}
 	}
 	for (int j = 0; j < 4; j++) {
-		if (this->date = 30 && this->month == arr30[j]) {
+		if (this->date = 30 && this->month == 3) {
 			this->date += 30;
 			this->month -= 1;
 			j = 4;
 		}
 	}
-	if (this->date == 1 && this->month == 3 && this->year % 100 == 0 && this->year % 400 = 0 || this->year % 100 > 0 && this->year % 4 == 0) {
-		this->date += 28;
-		this->month -= 1;
-	}
-	else if (this->date == 1 && this->month == 3 && this->year % 100 > 0 && this->year % 400 > 0 || this->year % 100 > 0 && this->year % 4 > 0) {
+	if (this->date == 1 && this->month == 3 && this->year % 100 > 0 && this->year % 400 > 0 || this->year % 100 > 0 && this->year % 4 > 0) {
 		this->date += 27;
 		this->month -= 1;
 	}
@@ -173,8 +159,8 @@ MyDate MyDate::operator++(int)
 {
 	MyDate temp(this->date, this->month, this->year);
 	for (int i = 0; i < 7; i++) {
-		if (date = 31 && month == arr31[i]) {
-			date -= 30;
+		if (date = 31 && month == 1) {
+			date == 1;
 			i = 7;
 			if (month == 12) {
 				month -= 11;
@@ -186,17 +172,13 @@ MyDate MyDate::operator++(int)
 		}
 	}
 	for (int j = 0; j < 4; j++) {
-		if (date = 30 && month == arr30[j]) {
+		if (date = 30 && month == 3) {
 			date -= 29;
 			month += 1;
 			j = 4;
 		}
 	}
-	if (date == 29 && month == 2 && year % 100 == 0 && year % 400 = 0 || year % 100 > 0 && year % 4 == 0) {
-		date -= 28;
-		month += 1;
-	}
-	else if (date == 28 && month == 2 && year % 100 > 0 && year % 400 > 0 || year % 100 > 0 && year % 4 > 0) {
+	 if (date == 28 && month == 2 && year % 100 > 0 && year % 400 > 0 || year % 100 > 0 && year % 4 > 0) {
 		date -= 27;
 		month += 1;
 	}
@@ -210,7 +192,7 @@ MyDate MyDate::operator--(int)
 {
 	MyDate temp(this->date, this->month, this->year); 
 	for (int i = 0; i < 7; i++) {
-		if (date = 1 && month == arr31[i]) {
+		if (date = 1 && month == 1) {
 			date += 29;
 			i = 7;
 			if (month == 1) {
@@ -223,17 +205,13 @@ MyDate MyDate::operator--(int)
 		}
 	}
 	for (int j = 0; j < 4; j++) {
-		if (date = 30 && month == arr30[j]) {
+		if (date = 30 && month == 3) {
 			date += 30;
 			month -= 1;
 			j = 4;
 		}
 	}
-	if (date == 1 && month == 3 && year % 100 == 0 && year % 400 = 0 || year % 100 > 0 && year % 4 == 0) {
-		date += 28;
-		month -= 1;
-	}
-	else if (date == 1 && month == 3 && year % 100 > 0 && year % 400 > 0 || year % 100 > 0 && year % 4 > 0) {
+	if (date == 1 && month == 3 && year % 100 > 0 && year % 400 > 0 || year % 100 > 0 && year % 4 > 0) {
 		date += 27;
 		month -= 1;
 	}
@@ -243,17 +221,14 @@ MyDate MyDate::operator--(int)
 	return temp;
 }
 
-MyDate MyDate::operator+(int b)
-{
-
-	return MyDate();
-}
-
-MyDate MyDate::operator-(int b)
-{
-	return MyDate();
-}
-
+//MyDate MyDate::operator+(int b)
+//{
+//}
+//
+//MyDate MyDate::operator-(int b)
+//{
+//}
+//
 
 
 
